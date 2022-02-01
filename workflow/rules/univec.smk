@@ -47,7 +47,7 @@ rule bwa_mem:
             ".sa",
         ),
     output:
-        "mapped/UniVec{core}/{sample}/{unit}.bam",
+        temp("mapped/UniVec{core}/{sample}/{unit}.bam"),
     params:
         index="genome",
         extra=r"-R '@RG\tID:{sample}\tSM:{sample}'",
