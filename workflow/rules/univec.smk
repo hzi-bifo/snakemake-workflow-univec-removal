@@ -1,21 +1,17 @@
 
 rule download_univec:
     output:
-        multiext(
-            "resources/UniVec{core}/",
-            "UniVec{core}.fa",
-            "README.uv",
-            "README.vector.origins",
-        ),
+        fasta="resources/UniVec{core}/UniVec{core}.fa",
+        uv="resources/UniVec{core}/README.uv",
+        origins="resources/UniVec{core}/README.vector.origins",
     log:
         "logs/UniVec{core}/download.log",
     conda:
         "../envs/curl.yaml"
-    cache: True
     shell:
-        "( curl -sS -o {output[0]} https://ftp.ncbi.nlm.nih.gov/pub/UniVec/UniVec{wildcards.core} && "
-        "  curl -sS -o {output[1]} https://ftp.ncbi.nlm.nih.gov/pub/UniVec/README.uv && "
-        "  curl -sS -o {output[2]} https://ftp.ncbi.nlm.nih.gov/pub/UniVec/README.vector.origins  ) > {log} 2>&1"
+        "( curl -sS -o {output.fasta} https://ftp.ncbi.nlm.nih.gov/pub/UniVec/UniVec{wildcards.core} && "
+        "  curl -sS -o {output.uv} https://ftp.ncbi.nlm.nih.gov/pub/UniVec/README.uv && "
+        "  curl -sS -o {output.origins} https://ftp.ncbi.nlm.nih.gov/pub/UniVec/README.vector.origins  ) > {log} 2>&1"
 
 
 rule bwa_index:
@@ -35,7 +31,6 @@ rule bwa_index:
     params:
         prefix=lambda wc: "UniVec{wc.core}",
         algorithm="bwtsw",
-    cache: True
     wrapper:
         "0.80.3/bio/bwa/index"
 
