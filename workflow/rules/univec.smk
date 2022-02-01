@@ -1,25 +1,35 @@
 
 rule download_univec:
     output:
-        fasta="resources/UniVec{core}.fa",
-        uv="resources/UniVec/README.uv",
-        origins="resources/UniVec/README.vector.origins",
+        multiext(
+            "resources/UniVec{core}/",
+            "UniVec{core}.fa",
+            "README.uv",
+            "README.vector.origins",
+        ),
     log:
         "logs/UniVec{core}/download.log",
     conda:
         "../envs/curl.yaml"
     cache: True
     shell:
-        "( curl -sS -o {output.fasta} https://ftp.ncbi.nlm.nih.gov/pub/UniVec/UniVec{wildcards.core} && "
-        "  curl -sS -o {output.uv} https://ftp.ncbi.nlm.nih.gov/pub/UniVec/README.uv && "
-        "  curl -sS -o {output.origins} https://ftp.ncbi.nlm.nih.gov/pub/UniVec/README.vector.origins  ) > {log} 2>&1"
+        "( curl -sS -o {output[0]} https://ftp.ncbi.nlm.nih.gov/pub/UniVec/UniVec{wildcards.core} && "
+        "  curl -sS -o {output[1]} https://ftp.ncbi.nlm.nih.gov/pub/UniVec/README.uv && "
+        "  curl -sS -o {output[2]} https://ftp.ncbi.nlm.nih.gov/pub/UniVec/README.vector.origins  ) > {log} 2>&1"
 
 
 rule bwa_index:
     input:
-        "resources/UniVec{core}.fa",
+        "resources/UniVec{core}/UniVec{core}.fa",
     output:
-        multiext("resources/UniVec{core}", ".amb", ".ann", ".bwt", ".pac", ".sa"),
+        multiext(
+            "resources/UniVec{core}/UniVec{core}",
+            ".amb",
+            ".ann",
+            ".bwt",
+            ".pac",
+            ".sa",
+        ),
     log:
         "logs/bwa_index/UniVec{core}.log",
     params:
@@ -33,7 +43,14 @@ rule bwa_index:
 rule bwa_mem:
     input:
         reads=["trimmed/{sample}/{unit}.1.fastq", "trimmed/{sample}/{unit}.2.fastq"],
-        genome=multiext("resources/UniVec{core}", ".amb", ".ann", ".bwt", ".pac", ".sa"),
+        genome=multiext(
+            "resources/UniVec{core}/UniVec{core}",
+            ".amb",
+            ".ann",
+            ".bwt",
+            ".pac",
+            ".sa",
+        ),
     output:
         "mapped/UniVec{core}/{sample}/{unit}.bam",
     params:
@@ -53,8 +70,8 @@ rule bam_2_unmapped_paired_fq:
     input:
         "mapped/UniVec{core}/{sample}.bam",
     output:
-        forward="trimmed/UniVec{core}_filtered/{sample}/{unit}.1.fastq.gz",
-        reverse="trimmed/UniVec{core}_filtered/{sample}/{unit}.2.fastq.gz",
+        fwd="trimmed/UniVec{core}_filtered/{sample}/{unit}.1.fastq.gz",
+        rev="trimmed/UniVec{core}_filtered/{sample}/{unit}.2.fastq.gz",
     conda:
         "../envs/samtools.yaml"
     log:
@@ -62,5 +79,5 @@ rule bam_2_unmapped_paired_fq:
     threads: 1
     shell:
         """
-        ( samtools fastq -F 0x2 -1 {output.forward} -2 {output.reverse} {input} ) >{log} 2>&1
+        ( samtools fastq -F 0x2 -1 {output.fwd} -2 {output.rev} {input} ) >{log} 2>&1
         """

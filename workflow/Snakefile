@@ -4,6 +4,9 @@
 # in particular regarding the standardized folder structure mentioned there.
 
 
+configfile: "config/config.yaml"
+
+
 include: "rules/common.smk"
 include: "rules/univec.smk"
 include: "rules/qc.smk"

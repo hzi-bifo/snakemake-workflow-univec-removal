@@ -1,6 +1,7 @@
 $schema: "https://json-schema.org/draft/2020-12/schema"
 
 description: row of the units.tsv, representing a sequencing unit, i.e. single-end or paired-end data
+
 type: object
 
 properties:
