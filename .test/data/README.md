@@ -1,7 +1,5 @@
 # reference genomes
 
-For the used reference genomes, see the subdirectory `data_generation/`
-
 ## `mason_genome.contig-length_6500.seed_37.fa`
 
 This file was generated with `mason` in the following version (installed via bioconda):
@@ -24,9 +22,9 @@ This file is simply a copy of the 5th entry in
 
 Reads were simulated separately from each of the above genomes, to keep sources of reads separate. 
 They were then joined for the workflow to remove the M13 reads again.
-Original read data as simulated can be found in the subdirectory `data_generation/`.
-The files found here, are simply copies.
-The workflow should remove all M13 reads from `test.R1.fq` and `test.R2.fq`.
+Original read data as simulated can be found here.
+The files found in `../trimmed/test/` are simply copies of `test.R1.fq` and `test.R2.fq`.
+The workflow should remove all M13 reads from them.
 The GitHub workflow validates this by comparing the resulting reads against the simulated genome reads.
 
 Reads were simulated with `mason` in the following version (installed via bioconda):
