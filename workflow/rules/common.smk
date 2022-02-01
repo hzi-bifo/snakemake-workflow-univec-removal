@@ -27,7 +27,7 @@ def get_final_output():
         expand(
             "trimmed/UniVec{core}_filtered/{sample_unit}.{read_number}.fastq.gz",
             core="_Core" if config["univec"]["core"] else "",
-            sample_unit=units.agg("{0[sample_name]}/{0[unit_name}".format),
+            sample_unit=units["sample_name"] + "/" + units["unit_name"],
             read_number=["1", "2"],
         )
     )
