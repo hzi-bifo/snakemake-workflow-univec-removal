@@ -1,0 +1,9 @@
+
+units: config/units.tsv
+
+univec:
+  # To avoid false positive removal of reads, set this
+  # to True (it then uses UniVec_Core). For details, see
+  # https://ftp.ncbi.nlm.nih.gov/pub/UniVec/README.uv
+  core: True
+
