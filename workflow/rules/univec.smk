@@ -63,7 +63,7 @@ rule bwa_mem:
 
 rule bam_2_unmapped_paired_fq:
     input:
-        "mapped/UniVec{core}/{sample}.bam",
+        "mapped/UniVec{core}/{sample}/{unit}.bam",
     output:
         fwd="trimmed/UniVec{core}_filtered/{sample}/{unit}.1.fastq.gz",
         rev="trimmed/UniVec{core}_filtered/{sample}/{unit}.2.fastq.gz",
