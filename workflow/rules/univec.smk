@@ -29,7 +29,7 @@ rule bwa_index:
     log:
         "logs/bwa_index/UniVec{core}.log",
     params:
-        prefix=lambda wc: "UniVec{wc.core}/UniVec{wc.core}",
+        prefix=lambda wc: f"UniVec{wc.core}/UniVec{wc.core}",
         algorithm="bwtsw",
     wrapper:
         "v1.0.0/bio/bwa/index"
