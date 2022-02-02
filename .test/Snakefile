@@ -13,9 +13,10 @@ module univec_removal:
 use rule * from univec_removal
 
 
-rule all:
+rule final:
     input:
         "diff.txt"
+    default_target: True
 
 
 rule test_output:
