@@ -18,7 +18,7 @@ rule bwa_index:
     input:
         "resources/UniVec{core}/UniVec{core}.fa",
     output:
-        multiext(
+        idx=multiext(
             "resources/UniVec{core}/UniVec{core}",
             ".amb",
             ".ann",
