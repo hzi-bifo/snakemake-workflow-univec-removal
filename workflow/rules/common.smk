@@ -27,7 +27,7 @@ def get_final_output():
     
     final_output.extend(
         expand(
-            "trimmed/UniVec{core}_filtered/{sample_unit}.{read_number}.fastq.gz",
+            "results/trimmed/UniVec{core}_filtered/{sample_unit}.{read_number}.fastq.gz",
             core="_Core" if config["univec"]["core"] else "",
             sample_unit=sample_units,
             read_number=["1", "2"],

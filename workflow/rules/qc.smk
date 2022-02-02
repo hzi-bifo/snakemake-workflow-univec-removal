@@ -1,15 +1,15 @@
 
 rule falco:
     input:
-        "trimmed/UniVec{core}_filtered/{sample}/{unit}.{read}.fastq.gz",
+        "results/trimmed/UniVec{core}_filtered/{sample}/{unit}.{read}.fastq.gz",
     output:
-        "trimmed/UniVec{core}_filtered/{sample}/{unit}.{read}/fastqc_data.txt",
+        "results/trimmed/UniVec{core}_filtered/{sample}/{unit}.{read}/fastqc_data.txt",
         report(
             "trimmed/UniVec{core}_filtered/{sample}/{unit}.{read}/fastqc_report.html",
             caption="../report/falco_univec.rst",
             category="Quality Control",
         ),
-        "trimmed/UniVec{core}_filtered/{sample}/{unit}.{read}/summary.txt",
+        "results/trimmed/UniVec{core}_filtered/{sample}/{unit}.{read}/summary.txt",
     params:
         out_dir=lambda wc, output: path.dirname(output[0]),
     conda:

@@ -36,7 +36,7 @@ rule bwa_index:
 
 rule bwa_mem:
     input:
-        reads=["trimmed/{sample}/{unit}.1.fastq", "trimmed/{sample}/{unit}.2.fastq"],
+        reads=["results/trimmed/{sample}/{unit}.1.fastq", "trimmed/{sample}/{unit}.2.fastq"],
         idx=multiext(
             "resources/UniVec{core}/UniVec{core}",
             ".amb",
@@ -46,7 +46,7 @@ rule bwa_mem:
             ".sa",
         ),
     output:
-        temp("mapped/UniVec{core}/{sample}/{unit}.bam"),
+        temp("results/mapped/UniVec{core}/{sample}/{unit}.bam"),
     params:
         index="genome",
         extra=r"-R '@RG\tID:{sample}\tSM:{sample}'",
@@ -62,10 +62,10 @@ rule bwa_mem:
 
 rule bam_2_unmapped_paired_fq:
     input:
-        "mapped/UniVec{core}/{sample}/{unit}.bam",
+        "results/mapped/UniVec{core}/{sample}/{unit}.bam",
     output:
-        fwd="trimmed/UniVec{core}_filtered/{sample}/{unit}.1.fastq.gz",
-        rev="trimmed/UniVec{core}_filtered/{sample}/{unit}.2.fastq.gz",
+        fwd="results/trimmed/UniVec{core}_filtered/{sample}/{unit}.1.fastq.gz",
+        rev="results/trimmed/UniVec{core}_filtered/{sample}/{unit}.2.fastq.gz",
     conda:
         "../envs/samtools.yaml"
     log:
