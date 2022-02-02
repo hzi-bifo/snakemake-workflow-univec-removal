@@ -32,5 +32,5 @@ rule test_output:
         "diff.txt",
     shell:
         """
-        diff <( zcat {input.processed} ) <( cat {input.expected} | sed -r -e 's#(@mason_genome\.contig-length_6500\.seed_37_[0-9]+)/[12]#\1#' ) >{output} 2&>1
+        diff <( zcat {input.processed} ) <( cat {input.expected} | sed -r -e 's#(@mason_genome\\.contig-length_6500\\.seed_37_[0-9]+)/[12]#\\1#' ) >{output} 2&>1
         """
