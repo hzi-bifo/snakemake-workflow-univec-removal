@@ -36,7 +36,9 @@ rule bwa_index:
 
 rule bwa_mem:
     input:
-        reads=["results/trimmed/{sample}/{unit}.1.fastq", "trimmed/{sample}/{unit}.2.fastq"],
+        reads=expand("results/trimmed/{{sample}}/{{unit}}.{read_num}.fastq",
+            read_num=["1", "2"],
+        ),
         idx=multiext(
             "resources/UniVec{core}/UniVec{core}",
             ".amb",
