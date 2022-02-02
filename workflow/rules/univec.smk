@@ -37,7 +37,7 @@ rule bwa_index:
 rule bwa_mem:
     input:
         reads=["trimmed/{sample}/{unit}.1.fastq", "trimmed/{sample}/{unit}.2.fastq"],
-        genome=multiext(
+        idx=multiext(
             "resources/UniVec{core}/UniVec{core}",
             ".amb",
             ".ann",
