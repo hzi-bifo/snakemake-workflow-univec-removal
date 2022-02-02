@@ -32,7 +32,7 @@ rule bwa_index:
         prefix=lambda wc: "UniVec{wc.core}",
         algorithm="bwtsw",
     wrapper:
-        "0.80.3/bio/bwa/index"
+        "1.0.0/bio/bwa/index"
 
 
 rule bwa_mem:
@@ -58,7 +58,7 @@ rule bwa_mem:
         "logs/bwa_mem/UniVec{core}/{sample}/{unit}.log",
     threads: 8
     wrapper:
-        "0.80.3/bio/bwa/mem"
+        "1.0.0/bio/bwa/mem"
 
 
 rule bam_2_unmapped_paired_fq:
