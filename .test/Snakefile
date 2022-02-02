@@ -1,0 +1,35 @@
+from snakemake.utils import min_version
+min_version("6.15")
+
+
+configfile: "config/config.yaml"
+
+
+module univec_removal:
+    snakefile: "../workflow/Snakefile"
+    config: config
+
+
+use rule * from univec_removal
+
+
+rule all:
+    input:
+        "diff.txt"
+
+
+rule test_output:
+    input:
+        processed=expand("results/trimmed/UniVec{core}_filtered/test/1.{read_number}.fastq.gz",
+            core="_Core" if config["univec"]["core"] else "",
+            read_number=["1", "2"],
+        ),
+        expected=expand("data/mason_genome.contig-length_6500.seed_37.{read_num}.fq",
+            read_num=["R1", "R2"],
+        ),
+    output:
+        "diff.txt",
+    shell:
+        """
+        diff <( zcat {input.processed} ) <( cat {input.expected} ) >{output} 2&>1
+        """
