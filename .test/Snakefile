@@ -15,7 +15,11 @@ use rule * from univec_removal
 
 rule final:
     input:
-        "diff.txt"
+        "diff.txt",
+        expand("results/trimmed/UniVec{core}_filtered/test/1.{read}/fastqc_report.html",
+            core="_Core" if config["univec"]["core"] else "",
+            read=["1", "2"],
+        ),
     default_target: True
 
 

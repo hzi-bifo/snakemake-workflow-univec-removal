@@ -5,7 +5,7 @@ rule falco:
     output:
         "results/trimmed/UniVec{core}_filtered/{sample}/{unit}.{read}/fastqc_data.txt",
         report(
-            "trimmed/UniVec{core}_filtered/{sample}/{unit}.{read}/fastqc_report.html",
+            "results/trimmed/UniVec{core}_filtered/{sample}/{unit}.{read}/fastqc_report.html",
             caption="../report/falco_univec.rst",
             category="Quality Control",
         ),
