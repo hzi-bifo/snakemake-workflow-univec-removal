@@ -1,7 +1,8 @@
 # Snakemake workflow: `snakemake-workflow-univec-removal`
 
-[![Snakemake](https://img.shields.io/badge/snakemake-≥6.3.0-brightgreen.svg)](https://snakemake.github.io)
+[![Snakemake](https://img.shields.io/badge/snakemake-≥6.15.0-brightgreen.svg)](https://snakemake.github.io)
 [![GitHub actions status](https://github.com/hzi-bifo/snakemake-workflow-univec-removal/workflows/Tests/badge.svg?branch=main)](https://github.com/hzi-bifo/snakemake-workflow-univec-removal/actions?query=branch%3Amain+workflow%3ATests)
+[![DOI](https://zenodo.org/badge/436690424.svg)](https://zenodo.org/badge/latestdoi/436690424)
 
 
 A Snakemake workflow for removing reads from lab contaminations by filtering with the vector sequences in [the UniVec database](https://www.ncbi.nlm.nih.gov/tools/vecscreen/univec/).
